@@ -30,8 +30,8 @@ catkin_package(
     INCLUDE_DIRS
         include
 )
-add_library(visual_path_tool src/visual_tool.cpp)
+add_library(visual_tool SHARED src/visual_tool.cpp)
 
 include_directories(${catkin_INCLUDE_DIRS})
 add_executable(rviz_visualize_tools src/demo_main.cpp)
-target_link_libraries(rviz_visualize_tools visual_path_tool ${catkin_LIBRARIES})
+target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES})
