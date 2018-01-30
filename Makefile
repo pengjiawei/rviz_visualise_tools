@@ -30,4 +30,4 @@ demo_main: src/demo_main.cpp
 	@echo 'libs = ' $(LIBS)
 	$(CC) $(INCLUDE_DIR) -o demo_main src/demo_main.cpp $(LIB_DIR) $(LIBS)
 clean:
-	rm -rf testVisual
+	rm -rf demo_main
