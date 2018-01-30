@@ -11,6 +11,11 @@ include_directories(SYSTEM include )
 #ROS_DEBUG
 add_definitions(-DCMAKE_BUILD_TYPE=Debug)
 add_definitions(-std=c++11)
+add_definitions(-W -Wall -Wextra
+        #-Wcast-qual
+        -Wwrite-strings -Wunreachable-code -Wpointer-arith
+        -Winit-self -Wredundant-decls
+        -Wno-unused-parameter -Wno-unused-function)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
@@ -25,8 +30,8 @@ catkin_package(
     INCLUDE_DIRS
         include
 )
-add_library(visual_path_tool src/visual_path_tool.cpp)
+add_library(visual_path_tool src/visual_tool.cpp)
 
 include_directories(${catkin_INCLUDE_DIRS})
-add_executable(rviz_visualize_tools src/main.cpp)
+add_executable(rviz_visualize_tools src/demo_main.cpp)
 target_link_libraries(rviz_visualize_tools visual_path_tool ${catkin_LIBRARIES})
