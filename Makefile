@@ -19,15 +19,21 @@ catkin_LIBRARIES=	\
 LIBS=-lvisual_tool $(catkin_LIBRARIES)
 TARGET=libvisual_tool.so
 
-all:build_so demo_main
+
+all:install demo_main
+
 
 #build libvisual_tool.so
 build_so: src/visual_tool.cpp
 	$(CC) $(INCLUDE_DIR) -shared -fPIC -o $(TARGET) src/visual_tool.cpp
 	cp $(TARGET) /lib
+
 demo_main: src/demo_main.cpp
 	@echo 'include directory ' $(INCLUDE_DIR)
 	@echo 'libs = ' $(LIBS)
 	$(CC) $(INCLUDE_DIR) -o demo_main src/demo_main.cpp $(LIB_DIR) $(LIBS)
+
+install:build_so
+
 clean:
-	rm -rf demo_main
+	rm -rf demo_main $(TARGET)

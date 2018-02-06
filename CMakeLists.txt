@@ -22,7 +22,13 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   std_msgs
 )
-
+#find_package(PkgConfig)
+#pkg_check_modules(BFL REQUIRED bfl)
+#
+#message("BFL include dirs:" ${BFL_INCLUDE_DIRS})
+#message("BFL library dirs:" ${BFL_LIBRARY_DIRS})
+#include_directories(${BFL_INCLUDE_DIRS})
+#link_directories(${BFL_LIBRARY_DIRS})
 catkin_package(
     CATKIN_DEPENDS
         roscpp
@@ -35,3 +41,4 @@ add_library(visual_tool SHARED src/visual_tool.cpp)
 include_directories(${catkin_INCLUDE_DIRS})
 add_executable(rviz_visualize_tools src/demo_main.cpp)
 target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES})
+#target_link_libraries(rviz_visualize_tools $(BFL_LIBRARY_DIRS))

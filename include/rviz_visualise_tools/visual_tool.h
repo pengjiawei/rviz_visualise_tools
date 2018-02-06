@@ -19,8 +19,10 @@ public:
     void publishPath( nav_msgs::Path& path);
     void publishOccupancyGrid(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<int>& cost_map_vec);
     void publishOccupancyGrid(const nav_msgs::OccupancyGrid& map);
-    void initCostTranslationTable();
-
+    void publishPgm(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<int>& cost_map_vec);
+    ///value of costmap to value of occupancyGrid
+    void initCostMapToOccTable();
+    int8_t pgmToOccValue(int pgm_value);
 
     void getPathTopic(std::string& path_topic){
         path_topic = path_topic_name;
@@ -34,7 +36,7 @@ private:
     const std::string path_topic_name,map_topic_name;
     ros::NodeHandle nh_;
     ///used for translating value of costMap to occupancyGrid
-    char* cost_translation_table = NULL;
+    char* costmap_to_occ_table = NULL;
 };
 
 
