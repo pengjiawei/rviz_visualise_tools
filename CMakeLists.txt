@@ -40,5 +40,5 @@ add_library(visual_tool SHARED src/visual_tool.cpp)
 
 include_directories(${catkin_INCLUDE_DIRS})
 add_executable(rviz_visualize_tools src/demo_main.cpp)
-target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES})
+target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES} boost_serialization boost_thread)
 #target_link_libraries(rviz_visualize_tools $(BFL_LIBRARY_DIRS))
