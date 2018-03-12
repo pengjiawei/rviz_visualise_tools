@@ -4,6 +4,7 @@
 #include <rviz_visualise_tools/visual_tool.h>
 #include <rviz_visualise_tools/general_tool.h>
 #include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 
 void readCostMapFromFile(std::vector<int>& value_vec);
 int main(int argc,char** argv) {
@@ -21,7 +22,7 @@ int main(int argc,char** argv) {
     work_done = false;
     char* recvData;
     recvData = new char[BUFF_SIZE];
-    boost::thread recvThread(createSocketAndReceive,recvData,12345,"/tmp/recvFile.txt");
+    boost::thread recvThread(SocketReceive,recvData,12345,"/tmp/recvFile.txt");
 
 //    tool.publishPgm(0.05,2,2,value_vec);
     while(ros::ok() && !work_done){
@@ -30,7 +31,8 @@ int main(int argc,char** argv) {
         lock.unlock();
 
         std::ifstream file("/tmp/recvFile.txt");
-        boost::archive::text_iarchive ia(file);
+//        boost::archive::text_iarchive ia(file);
+        boost::archive::binary_iarchive ia(file);
         int i;
         for(int32 y = 0 ; y < 480 ; ++y){
             for(int32 x = 0; x< 480 ; ++x){

@@ -22,7 +22,7 @@ bool work_done;
 boost::mutex mutex;
 
 boost::condition cv;
-void createSocketAndReceive(char* recvData,int port,std::string recvFileName) {
+void SocketReceive(char* recvData,int port,std::string recvFileName) {
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port);
@@ -56,7 +56,7 @@ void createSocketAndReceive(char* recvData,int port,std::string recvFileName) {
 
     while (true) {
 
-        FILE* file = fopen(recvFileName.c_str(),"a+");
+
         FD_ZERO(&server_fd_set);
         FD_SET(server_sock_fd, &server_fd_set);
 
@@ -91,6 +91,7 @@ void createSocketAndReceive(char* recvData,int port,std::string recvFileName) {
                 size_t all = 0;
                 int offset = 0;
 
+                FILE* file = fopen(recvFileName.c_str(),"w+");
                 while(byte_num = recv(client_sock_fd, recvData, BUFF_SIZE,
                                       0)){
                     printf("recv_return = %d\n", byte_num);
