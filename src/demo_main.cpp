@@ -33,7 +33,11 @@ int main(int argc,char** argv) {
         std::ifstream file("/tmp/recvFile.txt");
 //        boost::archive::text_iarchive ia(file);
         boost::archive::binary_iarchive ia(file);
+        int width,height;
+        double resolution;
         int i;
+        ia >> width >> height >> resolution;
+        ROS_INFO("width = %d,height =%d, resolution = %4f",width,height,resolution);
         for(int32 y = 0 ; y < 480 ; ++y){
             for(int32 x = 0; x< 480 ; ++x){
                 ia >> i;
