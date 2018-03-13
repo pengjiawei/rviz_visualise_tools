@@ -16,6 +16,8 @@ add_definitions(-W -Wall -Wextra
         -Wwrite-strings -Wunreachable-code -Wpointer-arith
         -Winit-self -Wredundant-decls
         -Wno-unused-parameter -Wno-unused-function)
+
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
@@ -36,9 +38,16 @@ catkin_package(
     INCLUDE_DIRS
         include
 )
-add_library(visual_tool SHARED src/visual_tool.cpp)
+set(BOOST_ROOT "/home/pengjiawei/boost_1_63/include/")
+#include_directories("/home/pengjiawei/boost_1_63/include/")
+#link_libraries("/home/pengjiawei/boost_1_63/lib")
 
+find_package(Boost 1.63.0 COMPONENTS thread serialization REQUIRED)
+message(STATUS "Boost_LIBRARIES: ${Boost_LIBRARIES}")
+
+add_library(visual_tool SHARED src/visual_tool.cpp)
+message(${catkin_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 add_executable(rviz_visualize_tools src/demo_main.cpp)
-target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES} boost_serialization boost_thread)
+target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES} boost_thread boost_serialization)
 #target_link_libraries(rviz_visualize_tools $(BFL_LIBRARY_DIRS))

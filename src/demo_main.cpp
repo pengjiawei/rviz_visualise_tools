@@ -30,7 +30,7 @@ int main(int argc,char** argv) {
         cv.wait(mutex);
         lock.unlock();
 
-        std::ifstream file("/tmp/recvFile.txt");
+        std::ifstream file("/tmp/recvFile.txt",ifstream::out);
 //        boost::archive::text_iarchive ia(file);
         boost::archive::binary_iarchive ia(file);
         int width,height;
@@ -49,7 +49,7 @@ int main(int argc,char** argv) {
         ros::spinOnce();
 
         ROS_INFO("publish");
-        r.sleep();
+//        r.sleep();
     }
 
 
