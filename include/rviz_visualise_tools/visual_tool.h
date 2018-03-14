@@ -40,7 +40,7 @@ private:
     const std::string path_topic_name,map_topic_name;
     ros::NodeHandle nh_;
     ///used for translating value of costMap to occupancyGrid
-    char* costmap_to_occ_table = NULL;
+    int8_t* costmap_to_occ_table = NULL;
 };
 
 

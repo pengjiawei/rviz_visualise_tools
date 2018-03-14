@@ -86,14 +86,14 @@ void visual_tool::publishOccupancyGrid(const nav_msgs::OccupancyGrid &map) {
     map_publisher.publish(map);
 }
 void visual_tool::initCostMapToOccTable() {
-    costmap_to_occ_table = new char[256];
+    costmap_to_occ_table = new int8_t[256];
     costmap_to_occ_table[0] = 0;
     costmap_to_occ_table[253] = 99;
     costmap_to_occ_table[254] = 100;
     costmap_to_occ_table[255] = -1;
     for(int i = 1; i < 253; i++)
     {
-        costmap_to_occ_table[i] = char(1 + (97 * (i - 1)) / 251);
+        costmap_to_occ_table[i] = int8_t(1 + (97 * (i - 1)) / 251);
     }
 }
 int8_t visual_tool::pgmToOccValue(int pgm_value) {
