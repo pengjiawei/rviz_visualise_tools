@@ -44,7 +44,7 @@ void visual_tool::publishPath( nav_msgs::Path& path) {
     path_publisher.publish(path);
 }
 
-void visual_tool::publishOccupancyGrid(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<int>& cost_map_vec){
+void visual_tool::publishOccupancyGrid(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<unsigned char>& cost_map_vec){
     if(costmap_to_occ_table == NULL){
         initCostMapToOccTable();
     }
@@ -57,7 +57,8 @@ void visual_tool::publishOccupancyGrid(const float& resolution,const unsigned in
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             index = j + i * height;
-            map_vec.push_back(costmap_to_occ_table[cost_map_vec[index]]);
+            int8_t value = costmap_to_occ_table[cost_map_vec[index]];
+            map_vec.push_back(value);
         }
     }
     map.data = map_vec;

@@ -39,15 +39,19 @@ catkin_package(
         include
 )
 set(BOOST_ROOT "/home/pengjiawei/boost_1_63/include/")
-#include_directories("/home/pengjiawei/boost_1_63/include/")
-#link_libraries("/home/pengjiawei/boost_1_63/lib")
+include_directories("/home/pengjiawei/boost_1_63/include/")
+
+link_directories("/home/pengjiawei/boost_1_63/lib")
 
 find_package(Boost 1.63.0 COMPONENTS thread serialization REQUIRED)
 message(STATUS "Boost_LIBRARIES: ${Boost_LIBRARIES}")
 
-add_library(visual_tool SHARED src/visual_tool.cpp)
-message(${catkin_INCLUDE_DIRS})
+add_library(visual_tool include/rviz_visualise_tools/visual_tool.h src/visual_tool.cpp)
 include_directories(${catkin_INCLUDE_DIRS})
+
 add_executable(rviz_visualize_tools src/demo_main.cpp)
 target_link_libraries(rviz_visualize_tools visual_tool ${catkin_LIBRARIES} boost_thread boost_serialization)
+
+add_executable(test_case src/test_case.cpp )
+target_link_libraries(test_case visual_tool ${catkin_LIBRARIES} boost_thread boost_serialization)
 #target_link_libraries(rviz_visualize_tools $(BFL_LIBRARY_DIRS))

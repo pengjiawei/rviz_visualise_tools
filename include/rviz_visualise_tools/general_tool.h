@@ -121,7 +121,7 @@ void SocketReceive(char* recvData,int port,std::string recvFileName) {
         }
     }
 }
-void readPgm(std::string pgm_file_path,unsigned int& width ,unsigned int& height,std::vector<int>& value_vec){
+void readPgm(std::string pgm_file_path,unsigned int& width ,unsigned int& height,std::vector<unsigned char>& value_vec){
     int row = 0, col = 0;
     ifstream infile(pgm_file_path);
     stringstream ss;

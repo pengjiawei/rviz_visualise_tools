@@ -12,12 +12,16 @@
 #include <geometry_msgs/PoseStamped.h>
 class visual_tool {
 public:
+    visual_tool(){
+        path_publisher = nh_.advertise<nav_msgs::Path>("path",1);
+        map_publisher = nh_.advertise<nav_msgs::OccupancyGrid>("map_topic",1);
+    }
     visual_tool(const std::string& path_topic,const std::string& map_topic, ros::NodeHandle nh = ros::NodeHandle("~"));
     void publishPath(const std::vector<double>& x_vec,const std::vector<double>& y_vec);
     void publishPath(const std::vector<geometry_msgs::PoseStamped>& pose_stamped_vec);
     void publishPath(const std::vector<geometry_msgs::Pose>& pose_vec);
     void publishPath( nav_msgs::Path& path);
-    void publishOccupancyGrid(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<int>& cost_map_vec);
+    void publishOccupancyGrid(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<unsigned char>& cost_map_vec);
     void publishOccupancyGrid(const nav_msgs::OccupancyGrid& map);
     void publishPgm(const float& resolution,const unsigned int& width,const unsigned int& height,const std::vector<int>& cost_map_vec);
     ///value of costmap to value of occupancyGrid
